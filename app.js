@@ -1,43 +1,42 @@
 // 1- Crea una web con bootstrap y js, que contenga un botón comenzar el juego, en ese momento se crea un número aleatorio que el usuario deberá adivinar, la interfaz del usuario debe tener además un input para ingresar un número y un botón enviar, al presionar el botón enviar mostrar en un alert si el usuario adivino o no el número mágico, si no lo adivino indicarle con un alert si el numero que ingreso es mayor o menor al número mágico.
 // Cuando el usuario adivine el numero mostrar un mensaje indicando al usuario que adivino el numero.
 
-
 /********* Mostrar el mensaje de ganador a travez de un popup (modal) *********/
 let numero;
 const generarNumero = () => {
   numero = Math.floor(Math.random() * 10);
   alert("El juego comenzó!!");
-}
+};
 
 const compararNumero = (num) => {
   let numeroIngresado = num.value;
-  
+
   if (numero == numeroIngresado) {
     alert(`Felicidades, acertaste! el numero era ${numero}`);
-  } else if (numeroIngresado > numero){
+  } else if (numeroIngresado > numero) {
     alert("El numero ingresado es mayor al numero magico");
   } else {
     alert("El numero ingresado es menor al numero magico");
   }
-}
+};
 
 // 2- Crea una clase llamada Persona que siga las siguientes condiciones:
 // Sus propiedades son: nombre, edad, DNI, sexo (H hombre, M mujer), peso y altura, año de nacimiento. Si quieres añadir alguna propiedad extra puedes hacerlo.
 // Los métodos que se debe poder utilizar  son:
 // mostrarGeneracion: este método debe mostrar un mensaje indicando a qué generación pertenece la persona creada y cual es el rasgo característico de esta generación.
 // Para realizar este método tener en cuenta la siguiente tabla de generaciones:
-                            //VER TABLA
+//VER TABLA
 // esMayorDeEdad: indica si es mayor de edad, devuelve un mensaje indicando que la persona es mayor de edad.
 // mostrarDatos: devuelve toda la información del objeto.
 // Luego crea la interfaz necesaria para que el usuario pueda crear un objeto persona, permitiendo ingresar las propiedades mediante un formulario, también agregar los botones “mostrar generación”, es “mayor de edad” e indicar en un alert el resultado de la función correspondiente.
 
-
 /********* Realizar carga de datos y mostrar en pantalla a cada persona cargada *********/
 /********* Mostrar, en un alert, los metodos de cada persona creada *********/
 
+const listaPersonas = [];
 
 class Persona {
-  constructor(nombre, edad, dni, sexo, peso, altura, nacimiento) {
+  constructor(nombre, edad, dni, sexo, peso, altura, nacimiento, generacion) {
     this.nombre = nombre;
     this.edad = edad;
     this.dni = dni;
@@ -45,11 +44,13 @@ class Persona {
     this.peso = peso;
     this.altura = altura;
     this.nacimiento = nacimiento;
+    this.generacion = generacion
   }
+
   esMayorDeEdad() {
-    if(this.edad >= 18){
+    if (this.edad >= 18) {
       console.log("Es mayor de edad");
-    }else{
+    } else {
       console.log("No es mayor de edad");
     }
   }
@@ -72,27 +73,79 @@ class Persona {
     //     break;
     // }
     if (this.nacimiento >= 1930 && this.nacimiento <= 1948) {
-      console.log("Silent Generation");
+      console.log("Silent Generation")
     } else if (this.nacimiento >= 1949 && this.nacimiento <= 1968) {
-      console.log("Baby Boom");
+      console.log("Baby Boom")
     } else if (this.nacimiento >= 1969 && this.nacimiento <= 1980) {
-      console.log("Generacion X");
+      console.log("Generacion X")
     } else if (this.nacimiento >= 1981 && this.nacimiento <= 1993) {
-      console.log("Generacion Y");
+      console.log("Generacion Y")
     } else if (this.nacimiento >= 1994 && this.nacimiento <= 2010) {
-      console.log("Generacion Z");
+      console.log("Generacion Z")
     } else {
-      console.log("Sin generacion disponible");
+      console.log("Sin generacion disponible")
     }
-      
+  }
+  agregarPersona() {
+    listaPersonas.push({
+      nombre: this.nombre,
+      edad: this.edad,
+      dni: this.dni,
+      sexo: this.sexo,
+      peso: this.peso,
+      altura: this.altura,
+      nacimiento: this.nacimiento,
+    });
+
+    const tableBody = document.getElementById("table-body");
+
+    tableBody.innerHTML = "";
+
+    listaPersonas.forEach((persona) => {
+      const elemento = `
+      <tr>
+      <td>${persona.nombre}</td>
+      <td>${persona.edad}</td>
+      <td>${persona.dni}</td>
+      <td>${persona.sexo}</td>
+      <td>${persona.peso}</td>
+      <td>${persona.altura}</td>
+      <td>${persona.nacimiento}</td>
+    </tr>
+      `;
+
+      tableBody.innerHTML += elemento;
+    });
   }
 }
 
-const leandro = new Persona("leandro", 46, 12123123, "undefined", 90, 170, 1976);
-const belisario = new Persona("Belisario", 19, 12123123, "undefined", 90, 170, 2003);
-const carlitos = new Persona("Belisario", 19, 12123123, "undefined", 90, 170, 2018);
+const nombre = document.getElementById("name");
+const edad = document.getElementById("edad");
+const dni = document.getElementById("dni");
+const sexo = document.getElementById("sexo");
+const peso = document.getElementById("peso");
+const altura = document.getElementById("altura");
+const nacimiento = document.getElementById("nacimiento");
 
+function mostrarPersona() {
+  const persona = new Persona(
+    nombre.value,
+    edad.value,
+    dni.value,
+    sexo.value,
+    peso.value,
+    altura.value,
+    nacimiento.value,
+    
+  );
 
-leandro.mostrarGeneracion();
-belisario.mostrarDatos();
-carlitos.esMayorDeEdad();
+  persona.agregarPersona();
+}
+
+//const leandro = new Persona("leandro", 46, 12123123, "undefined", 90, 170, 1976);
+//const belisario = new Persona("Belisario", 19, 12123123, "undefined", 90, 170, 2003);
+//const carlitos = new Persona("Belisario", 19, 12123123, "undefined", 90, 170, 2018);
+
+//leandro.mostrarGeneracion();
+//belisario.mostrarDatos();
+//carlitos.esMayorDeEdad();

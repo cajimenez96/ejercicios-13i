@@ -62,15 +62,9 @@ class Persona {
     console.log(`Su altura es de: ${this.altura}`);
     console.log(`Nació en el año: ${this.nacimiento}`);
   }
+
   mostrarGeneracion() {
-    // switch (true) {
-    //   case (this.nacimiento >= 1930 && this.nacimiento <= 1948):
-    //     console.log("Silent Generation");
-    //     break;
-    //   default:
-    //     console.log("Sin generacion disponible");
-    //     break;
-    // }
+
     if (this.nacimiento >= 1930 && this.nacimiento <= 1948) {
       console.log("Silent Generation");
     } else if (this.nacimiento >= 1949 && this.nacimiento <= 1968) {
@@ -88,6 +82,56 @@ class Persona {
   }
 }
 
+let button = document.getElementById('button-1');
+button.addEventListener('click', tomarDatas);
+
+function tomarDatas() {
+  console.log('Ejecutando Funcion')
+  let dataName = document.getElementById('name').value;
+  let dataEdad = document.getElementById('edad').value;
+  let dataDni = document.getElementById('dni').value;
+  let dataSexo = document.getElementById('sexo').value;
+  let dataPeso = document.getElementById('peso').value;
+  let dataAltura = document.getElementById('altura').value;
+  let dataNacimiento = document.getElementById('nacimiento').value;
+
+  let tabla = document.getElementById('body_table');
+  let fila = document.createElement('tr')
+  
+  let array= [dataName,dataEdad,dataDni,dataSexo,dataPeso,dataAltura,dataNacimiento];
+  for (let index = 0; index < array.length; index++) {
+    let celda = document.createElement('td')
+    celda.textContent = array[index];
+    fila.appendChild(celda)
+  }
+  tabla.appendChild(fila)
+  // celda.textContent= dataName;
+  // fila.appendChild(celda)
+  // tabla.appendChild(fila)
+ 
+  // let fila = `<tr>
+  //   <td>${dataName}</td>
+  //   <td>2</td>
+  //   <td>3</td>
+  //   <td>4</td>
+  //   <td>5</td>
+  //   <td>6</td>
+  //   <td>7</td>
+  // </tr>
+  // `
+  }
+  // tabla.appendChild(fila);
+  // let celda = document.createElement('td')
+  // let celda2 = document.createElement('td')
+  // celda.textContent = dataName
+  // celda2.textContent = 'segunda celda'
+  // fila.appendChild(celda)
+
+
+
+
+
+/*
 const leandro = new Persona("leandro", 46, 12123123, "undefined", 90, 170, 1976);
 const belisario = new Persona("Belisario", 19, 12123123, "undefined", 90, 170, 2003);
 const carlitos = new Persona("Belisario", 19, 12123123, "undefined", 90, 170, 2018);
@@ -96,3 +140,20 @@ const carlitos = new Persona("Belisario", 19, 12123123, "undefined", 90, 170, 20
 leandro.mostrarGeneracion();
 belisario.mostrarDatos();
 carlitos.esMayorDeEdad();
+
+let generacion1 = (nacimiento) => {
+  if (nacimiento >= 1930 && nacimiento <= 1948) {
+    console.log("Silent Generation");
+  } else if (nacimiento >= 1949 && nacimiento <= 1968) {
+    console.log("Baby Boom");
+  } else if (nacimiento >= 1969 && nacimiento <= 1980) {
+    console.log("Generacion X");
+  } else if (nacimiento >= 1981 && nacimiento <= 1993) {
+    console.log("Generacion Y");
+  } else if (nacimiento >= 1994 && nacimiento <= 2010) {
+    console.log("Generacion Z");
+  } else {
+    console.log("Sin generacion disponible");
+  }
+}
+*/
